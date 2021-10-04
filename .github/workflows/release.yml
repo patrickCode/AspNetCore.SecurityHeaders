@@ -1,0 +1,26 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore **/AspNetCore.SecurityHeader.sln
+    - name: Build
+      run: dotnet build **/AspNetCore.SecurityHeader.sln --no-restore
+    - name: Test
+      run: dotnet test **/AspNetCore.SecurityHeader.sln --no-build --verbosity normal
+    - name: Pack
+      run: dotnet pack src/AspNetCore.SecurityHeader.csproj
+    - name: Publish
+      run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.NuGet_API_Key }} --source https://api.nuget.org/v3/index.json
