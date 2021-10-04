@@ -18,8 +18,8 @@ jobs:
       with:
         dotnet-version: 3.1.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore **/AspNetCore.SecurityHeader.sln
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build **/AspNetCore.SecurityHeader.sln --no-restore 
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test **/AspNetCore.SecurityHeader.sln --no-build --verbosity normal
