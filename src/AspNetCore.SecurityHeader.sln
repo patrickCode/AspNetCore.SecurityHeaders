@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.SecurityHeader", "AspNetCore.SecurityHeader.csproj", "{605AE32D-3CCB-442E-8834-1C9C2FC832E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.SecurityHeader", "AspNetCore.SecurityHeader.csproj", "{605AE32D-3CCB-442E-8834-1C9C2FC832E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{F40A1444-477D-458C-BB10-C94C4152FF0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample_Net31", "..\sample\Sample_Net31\Sample_Net31.csproj", "{8843D84A-3F78-41DE-9B17-36FF4448B676}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{605AE32D-3CCB-442E-8834-1C9C2FC832E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{605AE32D-3CCB-442E-8834-1C9C2FC832E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{605AE32D-3CCB-442E-8834-1C9C2FC832E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8843D84A-3F78-41DE-9B17-36FF4448B676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8843D84A-3F78-41DE-9B17-36FF4448B676}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8843D84A-3F78-41DE-9B17-36FF4448B676}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8843D84A-3F78-41DE-9B17-36FF4448B676}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8843D84A-3F78-41DE-9B17-36FF4448B676} = {F40A1444-477D-458C-BB10-C94C4152FF0F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {01B15A9B-A2F5-46D8-96E3-F993DF79570E}

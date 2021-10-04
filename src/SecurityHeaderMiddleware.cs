@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
@@ -24,11 +25,11 @@ namespace AspNetCore.SecurityHeader
             _policy = policy;
         }
 
-        public Task Invoke(HttpContext context)
+        public async Task Invoke(HttpContext context)
         {
             AddHeaders(context);
             RemoveHeaders(context);
-            return _next.Invoke(context);
+            await _next.Invoke(context);
         }
 
         private void AddHeaders(HttpContext context)
@@ -47,14 +48,26 @@ namespace AspNetCore.SecurityHeader
 
         private void RemoveHeaders(HttpContext context)
         {
-            if (_policy == null || _policy.RemovedHeaders == null || !_policy.RemovedHeaders.Any())
-                return;
-
-            foreach (var header in _policy.RemovedHeaders)
+            try
             {
-                if (context.Response.Headers.ContainsKey(header))
-                    context.Response.Headers.Remove(header);
+                context.Response.OnStarting(() =>
+                {
+                    if (_policy == null || _policy.RemovedHeaders == null || !_policy.RemovedHeaders.Any())
+                        return Task.FromResult(0);
+
+                    foreach (var header in _policy.RemovedHeaders)
+                    {
+                        if (context.Response.Headers.ContainsKey(header))
+                            context.Response.Headers.Remove(header);
+                    }
+                    return Task.FromResult(0);
+                });
             }
+            catch (Exception)
+            {
+                // DO NOT BLOCK HTTP MIDDLEWARE IF REMOVAL FAILS
+            }
+            
         }
     }
 }
